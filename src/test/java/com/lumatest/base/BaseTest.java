@@ -15,7 +15,7 @@ public abstract class BaseTest {
     protected void setupWebDriverManager() {
         WebDriverManager.chromedriver().setup();
 //        WebDriverManager.firefoxdriver().setup();
-        WebDriverManager.edgedriver().setup();
+//        WebDriverManager.edgedriver().setup();
     }
 
     @Parameters("browser")
