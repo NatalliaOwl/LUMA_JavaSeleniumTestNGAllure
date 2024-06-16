@@ -1,10 +1,8 @@
-package com.lumatest;
-
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-public class TestTest {
+public class FrameworkTest {
     @Test
     public void testPass() {
 
