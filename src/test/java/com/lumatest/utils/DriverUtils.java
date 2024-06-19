@@ -3,7 +3,6 @@ package com.lumatest.utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.chromium.ChromiumOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,7 +14,6 @@ public class DriverUtils {
     private static final ChromeOptions chromeOptions;
     private static final FirefoxOptions firefoxOptions;
     private static final EdgeOptions edgeOptions;
-    private static final ChromiumOptions<ChromeOptions> chromiumOptions;
 
     static {
         chromeOptions = new ChromeOptions();
@@ -38,9 +36,6 @@ public class DriverUtils {
         firefoxOptions.addArguments("--disable-gpu");
         firefoxOptions.addArguments("--no-sandbox");
         firefoxOptions.addArguments("--disable-dev-shm-usage");
-        firefoxOptions.addArguments("--disable-web-security");
-        firefoxOptions.addArguments("--allow-running-insecure-content");
-        firefoxOptions.addArguments("--ignore-certificate-errors");
 
         edgeOptions = new EdgeOptions();
 
@@ -53,8 +48,6 @@ public class DriverUtils {
         edgeOptions.addArguments("--disable-web-security");
         edgeOptions.addArguments("--allow-running-insecure-content");
         edgeOptions.addArguments("--ignore-certificate-errors");
-
-        chromiumOptions = chromeOptions;
     }
 
     private static WebDriver createChromeDriver(WebDriver driver) {
@@ -91,19 +84,6 @@ public class DriverUtils {
         return edgeDriver;
     }
 
-    private static WebDriver createChromiumDriver(WebDriver driver) {
-        if (driver != null) {
-            driver.quit();
-        }
-        ChromeDriver chromeDriver = new ChromeDriver((ChromeOptions) chromiumOptions);
-        chromeDriver.executeCdpCommand("Network.enable", Map.of());
-        chromeDriver.executeCdpCommand(
-                "Network.setExtraHTTPHeaders", Map.of("headers", Map.of("accept-language", "en-US,en;q=0.9"))
-        );
-
-        return chromeDriver ;
-    }
-
     public static WebDriver createDriver(String browser, WebDriver driver) {
         switch (browser) {
             case "chrome" -> {
@@ -114,9 +94,6 @@ public class DriverUtils {
             }
             case "edge" -> {
                 return createEdgeDriver(driver);
-            }
-            case "chromium" -> {
-                return createChromiumDriver(driver);
             }
             default -> {
                 return null;
