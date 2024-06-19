@@ -2,7 +2,12 @@ package com.lumatest.test;
 
 import com.lumatest.base.BaseTest;
 import com.lumatest.data.TestData;
-import io.qameta.allure.*;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+import io.qameta.allure.Description;
+import io.qameta.allure.Link;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,9 +15,9 @@ import org.testng.annotations.Test;
 public class NavigationTest extends BaseTest {
 
     @Test(
-            groups = {"Smoke", "Regression"},
+            testName = "NAVIGATION | Open Base URL",
             description = "TC-01 Open Base URL",
-            testName = "NAVIGATION | Open Base URL"
+            groups = {"smoke", "regression"}
     )
     @Story("Navigation")
     @Severity(SeverityLevel.BLOCKER)
@@ -37,9 +42,9 @@ public class NavigationTest extends BaseTest {
     }
 
     @Test(
-            groups = {"Smoke", "Regression"},
-            description = "TC-02 Top Menu Navigation",
             testName = "NAVIGATION | Navigate to top menu",
+            description = "TC-02 Top Menu Navigation",
+            groups = {"smoke", "regression"},
             dataProvider = "navigationData",
             dataProviderClass = TestData.class
     )
